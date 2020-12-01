@@ -17,7 +17,6 @@ public class StoffVerkaufenCustomTest {
         PrintStream originalOut = System.out;
         System.setOut(new PrintStream(outContent));
 
-        // Execute test here
         long[] preisePreisliste_gekuerzt = Arrays.copyOf(PREISLISTE, PREISLISTE.length - 1 - RND.nextInt(1));
         StoffVerkaufenPublicTest.check_naive("Verkuerzte PREISLISTE", PREISLISTE.length, preisePreisliste_gekuerzt, 22, preisePreisliste_gekuerzt.length == 7 ? 1278 : 1270);
         // @TODO Add test for DP solution
@@ -34,11 +33,9 @@ public class StoffVerkaufenCustomTest {
         PrintStream originalErr = System.err;
         System.setErr(new PrintStream(errContent));
 
-        // Execute test here
         long[] preisePreisliste_gekuerzt = Arrays.copyOf(PREISLISTE, PREISLISTE.length - 1 - RND.nextInt(1));
         StoffVerkaufenPublicTest.check_naive("Verkuerzte PREISLISTE", PREISLISTE.length, preisePreisliste_gekuerzt, 22, preisePreisliste_gekuerzt.length == 7 ? 1278 : 1270);
         // @TODO Add test for DP solution
-
 
         assertEquals("This exercise prohibits the use of the Java API. This includes System.out.println(). " +
                 "You should remove any such calls before upload!", "", errContent.toString());
