@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.Random;
+
 import static org.junit.Assert.*;
 
 public class StoffVerkaufenCustomTest {
@@ -12,7 +13,7 @@ public class StoffVerkaufenCustomTest {
 
     @Test
     public void custTest__noStdout() {
-        /** Tests for unallowed output (e.g. Java-API prohibited) **/
+        // Tests for unallowed output (e.g. Java-API prohibited)
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         PrintStream originalOut = System.out;
         System.setOut(new PrintStream(outContent));
@@ -28,7 +29,7 @@ public class StoffVerkaufenCustomTest {
 
     @Test
     public void custTest__noStderr() {
-        /** Tests for unallowed output (e.g. Java-API prohibited) **/
+        // Tests for unallowed output (e.g. Java-API prohibited)
         ByteArrayOutputStream errContent = new ByteArrayOutputStream();
         PrintStream originalErr = System.err;
         System.setErr(new PrintStream(errContent));
