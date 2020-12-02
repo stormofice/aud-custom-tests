@@ -1,2 +1,3 @@
 # Exclude .idea Intellij configuration folder
 .idea/
+*.iml
