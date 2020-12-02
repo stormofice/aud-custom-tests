@@ -6,8 +6,11 @@ import static org.junit.Assert.*;
 
 public class KenKenCustomTest {
 
+    /**
+     * Tests whether checkIntegrity can successfully identify a valid (integrity wise) KenKen
+     */
     @Test(timeout = 500)
-    public void cusTest_checkIntegrity_good() {
+    public void customTest_checkIntegrity_good() {
         int[][][] goodKenKen = new int[][][]{
                 {{4, 45}, {0, 0}, {1, 1}},
                 {{24, 42}, {0, 1}, {0, 2}, {0, 3}},
@@ -28,8 +31,11 @@ public class KenKenCustomTest {
         assertEquals("Good KenKen, that complies with all integrity rules", 0, KenKen.checkIntegrity(goodKenKen));
     }
 
+    /**
+     * Tests every way in which a KenKen can be invalid (integrity wise)
+     */
     @Test(timeout = 500)
-    public void cusTest_checkIntegrity_allFailures() {
+    public void customTest_checkIntegrity_allFailures() {
 
         assertEquals("1. Check non null", 1, KenKen.checkIntegrity(null));
         assertEquals("1. Check at least one entry", 1, KenKen.checkIntegrity(new int[0][0][0]));
@@ -93,8 +99,11 @@ public class KenKenCustomTest {
 
     }
 
+    /**
+     * Tests most ways in which a KenKen can be invalid (validity wise)
+     */
     @Test(timeout = 500)
-    public void cusTest_checkValidity_allFailures() {
+    public void customTest_checkValidity_allFailures() {
         int[][][] sixthTestKenKenOne = new int[][][]{{{0, 42}, {-1, 1}}};
         assertEquals("1. Structural integrity (6. Each coordinate should be >= 0)", 1, KenKen.checkValidity(sixthTestKenKenOne));
 

@@ -11,9 +11,11 @@ public class StoffVerkaufenCustomTest {
     private static final long[] PREISLISTE = {1, 5, 8, 9, 10, 17, 17, 20};
     private static final Random RND = new Random(4711_0815_666L);
 
+    /**
+     * Tests for unallowed output (e.g. Java-API prohibited)
+     */
     @Test
-    public void custTest__noStdout() {
-        // Tests for unallowed output (e.g. Java-API prohibited)
+    public void customTest__noStdout() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         PrintStream originalOut = System.out;
         System.setOut(new PrintStream(outContent));
@@ -27,9 +29,11 @@ public class StoffVerkaufenCustomTest {
         System.setOut(originalOut);
     }
 
+    /**
+     *  Tests for unallowed output (e.g. Java-API prohibited)
+     */
     @Test
-    public void custTest__noStderr() {
-        // Tests for unallowed output (e.g. Java-API prohibited)
+    public void customTest__noStderr() {
         ByteArrayOutputStream errContent = new ByteArrayOutputStream();
         PrintStream originalErr = System.err;
         System.setErr(new PrintStream(errContent));
