@@ -8,11 +8,6 @@ import java.util.Random;
 import static org.junit.Assert.*;
 
 public class StoffVerkaufenCustomTest extends StoffVerkaufenPublicTest {
-    private static final long[] PREISLISTE = {1, 5, 8, 9, 10, 17, 17, 20};
-    private static final Random RND = new Random(4711_0815_666L);
-    private static final String RELEVANT_STACK_TRACE_CLASS = "StoffVerkaufen";
-    private static final String[] RELEVANT_STACK_TRACE_METHS = {"verkaufenNaive", "verkaufenDP"};
-
     /**
      * Tests for unallowed output (e.g. Java-API prohibited)
      */
