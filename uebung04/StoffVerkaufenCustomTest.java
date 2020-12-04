@@ -1,11 +1,9 @@
-import org.junit.*;
+import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.Arrays;
-import java.util.Random;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class StoffVerkaufenCustomTest extends StoffVerkaufenPublicTest {
     /**
