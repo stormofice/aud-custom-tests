@@ -12,7 +12,7 @@ public class KenKenCustomTest {
      * Warning: can be up to 1hr if code is not effective.
      */
     @Test
-    public void cusTest_exampleSolve9x9_0_full() {
+    public void customTest_exampleSolve9x9_0_full() {
         int[][][] testInputOrg = {
                 {{3, '-'}, {0, 0}, {0, 1}},
                 {{20, '*'}, {0, 2}, {0, 3}, {1, 3}},
@@ -72,7 +72,7 @@ public class KenKenCustomTest {
      * => Can potentially help with debugging.
      */
     @Test
-    public void cusTest_exampleSolve9x9_0_white() {
+    public void customTest_exampleSolve9x9_0_white() {
         int[][][] testInputOrg = {
                 {{3, '-'}, {0, 0}, {0, 1}},
                 {{20, '*'}, {0, 2}, {0, 3}, {1, 3}},
