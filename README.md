@@ -34,5 +34,6 @@ Bitte beachte die folgenden optimalen Vorgehensweisen wenn du mitarbeitest:
 	* Hinterlasse Kommentare darüber, was verändert werden müsste, um daraus einen funktionierenden JUnit test zu erstellen.
 * Die Übungen können in den dazugehörigen Ordnern `uebung##/` (z.B. `uebung01/`) gefunden werden.
 * Verwende Zutun-Kommentare (`// @TODO verbessere xzy`), um unerledigte Aufgaben zu markieren.
+* Die Namen der Testmethoden sollen mit `custom_*` starten
 * Der Quelltext hier wird unter einer [lizenzfreien Lizenz](./LICENSE) veröffentlicht. Bitte sei dir dessen bewusst.
 
