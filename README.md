@@ -6,7 +6,13 @@ Please feel free to contribute, review or ask questions.
 
 If you want to contribute, please carefully read the [CONTRIBUTING](https://github.com/stormofice/aud-custom-tests/blob/main/CONTRIBUTING.md) guidelines.
 
+### Installation / How to use
+You should be able to copy the custom test in your IDE of choice and run it without any further changes. If this does not work and you made sure that isn't a problem specific to your setup, create an issue.
+
 ---
 
 Dieses Repository enthält selbstgeschriebene Tests für die Übungen des Moduls "Algorithmen und Datenstrukturen".
 Wenn du dich daran beteiligen willst, les dir bitte sorgfältig die [CONTRIBUTING](https://github.com/stormofice/aud-custom-tests/blob/main/CONTRIBUTING.md) Richtlinien durch.
+
+### Installation / Verwendung
+Es sollte genügen den Custom Test in eine IDE deiner Wahl zu ziehen und diesen auszuführen. Falls dies nicht möglich ist, erstell ein Problem unter "Issues".
