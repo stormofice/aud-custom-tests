@@ -7,6 +7,136 @@ import static org.junit.Assert.*;
 public class KenKenCustomTest {
 
     /**
+     * Checks if the KenKen code is able to solve a bigger (and more complex) KenKen
+     * Note: Timeout is intentionally left out, to see how long the code takes for this complex KenKen.
+     * Warning: can be up to 1hr if code is not effective.
+     */
+    @Test
+    public void cusTest_exampleSolve9x9_0_full() {
+        int[][][] testInputOrg = {
+                {{3, '-'}, {0, 0}, {0, 1}},
+                {{20, '*'}, {0, 2}, {0, 3}, {1, 3}},
+                {{1, '-'}, {0, 4}, {1, 4},},
+                {{4, '/'}, {0, 5}, {0, 6}},
+                {{6, '-'}, {0, 7}, {0, 8}},
+                {{18, '*'}, {1, 0}, {1, 1}, {1, 2}},
+                {{5, '-'}, {1, 5}, {1, 6}},
+                {{120, '*'}, {1, 7}, {1, 8}, {2, 8}},
+                {{30, '+'}, {2, 0}, {2, 1}, {2, 2}, {2, 3}},
+                {{4, '-'}, {2, 4}, {3, 4}},
+                {{2, '-'}, {2, 5}, {3, 5}},
+                {{54, '*'}, {2, 6}, {2, 7}, {3, 6}, {3, 7}},
+                {{2, '-'}, {3, 0}, {3, 1}},
+                {{5, '-'}, {3, 2}, {3, 3}},
+                {{1, '-'}, {3, 8}, {4, 8}},
+                {{11, '+'}, {4, 0}, {5, 0}, {6, 0}, {7, 0}},
+                {{72, '*'}, {4, 1}, {5, 1}},
+                {{1, '-'}, {4, 2}, {5, 2}},
+                {{6, '-'}, {4, 3}, {4, 4}},
+                {{6, ' '}, {4, 5}},
+                {{1, '-'}, {4, 6}, {4, 7}},
+                {{20, '+'}, {5, 3}, {5, 4}, {6, 3}, {6, 4}},
+                {{5, '-'}, {5, 5}, {5, 6}},
+                {{28, '*'}, {5, 7}, {6, 6}, {6, 7}},
+                {{40, '*'}, {5, 8}, {6, 8}},
+                {{2, '-'}, {6, 1}, {6, 2}},
+                {{5, '-'}, {6, 5}, {7, 5}},
+                {{4, '/'}, {7, 1}, {7, 2}},
+                {{3, '/'}, {7, 3}, {7, 4}},
+                {{1, '-'}, {7, 6}, {8, 6}},
+                {{2, '-'}, {7, 7}, {8, 7}},
+                {{2, '-'}, {7, 8}, {8, 8}},
+                {{2, '-'}, {8, 0}, {8, 1}},
+                {{10, '+'}, {8, 2}, {8, 3}, {8, 4}, {8, 5}}
+        };
+        int[][] expectedSolution = { //
+                {4, 7, 1, 5, 6, 8, 2, 9, 3},
+                {9, 1, 2, 4, 7, 3, 8, 5, 6},
+                {8, 6, 9, 7, 1, 5, 3, 2, 4},
+                {6, 4, 3, 8, 5, 7, 9, 1, 2},
+                {5, 9, 7, 2, 8, 6, 4, 3, 1},
+                {3, 8, 6, 1, 9, 2, 7, 4, 5},
+                {2, 3, 5, 6, 4, 9, 1, 7, 8},
+                {1, 2, 8, 9, 3, 4, 5, 6, 7},
+                {7, 5, 4, 3, 2, 1, 6, 8, 9}
+        };
+        int[][][] testInput = deepCloneKenken(testInputOrg);
+        int[][] studentSolution = KenKen.solve(testInputOrg);
+        assertArrayEquals("kenkenExample: " + METHOD_NAME_KenKen_solve + " MODIFIED THE INPUT KenKen!", testInputOrg, testInput);
+        assertNotNull("kenkenExampleOriginal: has a solution, but " + METHOD_NAME_KenKen_solve + " didn't find it.", studentSolution);
+        assertArrayEquals("kenkenExampleOriginal: solution returned by " + METHOD_NAME_KenKen_solve + " is wrong.", expectedSolution, studentSolution);
+    }
+
+    /**
+     * The same as cusTest_exampleSolve9x9_0_full but with more whitespace fields to speed up solving.
+     * => Can potentially help with debugging.
+     */
+    @Test
+    public void cusTest_exampleSolve9x9_0_white() {
+        int[][][] testInputOrg = {
+                {{3, '-'}, {0, 0}, {0, 1}},
+                {{20, '*'}, {0, 2}, {0, 3}, {1, 3}},
+                {{1, '-'}, {0, 4}, {1, 4},},
+                {{4, '/'}, {0, 5}, {0, 6}},
+                {{6, '-'}, {0, 7}, {0, 8}},
+                {{18, '*'}, {1, 0}, {1, 1}, {1, 2}},
+                {{5, '-'}, {1, 5}, {1, 6}},
+                {{120, '*'}, {1, 7}, {1, 8}, {2, 8}},
+                {{8, ' '}, {2, 0}},
+                {{6, ' '}, {2, 1}},
+                {{9, ' '}, {2, 2}},
+                {{7, ' '}, {2, 3}},
+                {{4, '-'}, {2, 4}, {3, 4}},
+                {{2, '-'}, {2, 5}, {3, 5}},
+                {{3, ' '}, {2, 6}},
+                {{2, ' '}, {2, 7}},
+                {{9, ' '}, {3, 6}},
+                {{1, ' '}, {3, 7}},
+                {{2, '-'}, {3, 0}, {3, 1}},
+                {{5, '-'}, {3, 2}, {3, 3}},
+                {{1, '-'}, {3, 8}, {4, 8}},
+                {{5, ' '}, {4, 0}},
+                {{3, ' '}, {5, 0}},
+                {{2, ' '}, {6, 0}},
+                {{1, ' '}, {7, 0}},
+                {{72, '*'}, {4, 1}, {5, 1}},
+                {{1, '-'}, {4, 2}, {5, 2}},
+                {{6, '-'}, {4, 3}, {4, 4}},
+                {{6, ' '}, {4, 5}},
+                {{1, '-'}, {4, 6}, {4, 7}},
+                {{20, '+'}, {5, 3}, {5, 4}, {6, 3}, {6, 4}},
+                {{5, '-'}, {5, 5}, {5, 6}},
+                {{28, '*'}, {5, 7}, {6, 6}, {6, 7}},
+                {{40, '*'}, {5, 8}, {6, 8}},
+                {{2, '-'}, {6, 1}, {6, 2}},
+                {{5, '-'}, {6, 5}, {7, 5}},
+                {{4, '/'}, {7, 1}, {7, 2}},
+                {{3, '/'}, {7, 3}, {7, 4}},
+                {{1, '-'}, {7, 6}, {8, 6}},
+                {{2, '-'}, {7, 7}, {8, 7}},
+                {{2, '-'}, {7, 8}, {8, 8}},
+                {{2, '-'}, {8, 0}, {8, 1}},
+                {{10, '+'}, {8, 2}, {8, 3}, {8, 4}, {8, 5}}
+        };
+        int[][] expectedSolution = { //
+                {4, 7, 1, 5, 6, 8, 2, 9, 3},
+                {9, 1, 2, 4, 7, 3, 8, 5, 6},
+                {8, 6, 9, 7, 1, 5, 3, 2, 4},
+                {6, 4, 3, 8, 5, 7, 9, 1, 2},
+                {5, 9, 7, 2, 8, 6, 4, 3, 1},
+                {3, 8, 6, 1, 9, 2, 7, 4, 5},
+                {2, 3, 5, 6, 4, 9, 1, 7, 8},
+                {1, 2, 8, 9, 3, 4, 5, 6, 7},
+                {7, 5, 4, 3, 2, 1, 6, 8, 9}
+        };
+        int[][][] testInput = deepCloneKenken(testInputOrg);
+        int[][] studentSolution = KenKen.solve(testInputOrg);
+        assertArrayEquals("kenkenExample: " + METHOD_NAME_KenKen_solve + " MODIFIED THE INPUT KenKen!", testInputOrg, testInput);
+        assertNotNull("kenkenExampleOriginal: has a solution, but " + METHOD_NAME_KenKen_solve + " didn't find it.", studentSolution);
+        assertArrayEquals("kenkenExampleOriginal: solution returned by " + METHOD_NAME_KenKen_solve + " is wrong.", expectedSolution, studentSolution);
+    }
+
+    /**
      * Tests whether checkIntegrity can successfully identify a valid (integrity wise) KenKen
      */
     @Test(timeout = 500)
