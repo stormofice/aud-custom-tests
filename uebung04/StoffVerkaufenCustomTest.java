@@ -6,6 +6,7 @@ import java.io.PrintStream;
 import static org.junit.Assert.assertEquals;
 
 public class StoffVerkaufenCustomTest extends StoffVerkaufenPublicTest {
+
     /**
      * Tests for unallowed output (e.g. Java-API prohibited)
      */
@@ -24,7 +25,7 @@ public class StoffVerkaufenCustomTest extends StoffVerkaufenPublicTest {
     }
 
     /**
-     *  Tests for unallowed output (e.g. Java-API prohibited)
+     * Tests for unallowed output (e.g. Java-API prohibited)
      */
     @Test
     public void customTest__noStderr() {
@@ -46,13 +47,13 @@ public class StoffVerkaufenCustomTest extends StoffVerkaufenPublicTest {
         check_naive("custom_1", -1, preise_custom, 0, 1);
         check_naive("custom_2", 0, preise_custom, 0, 1);
 
-        preise_custom = new long[] {1};
+        preise_custom = new long[]{1};
         check_naive("custom_3", -1, preise_custom, 0, 1);
         check_naive("custom_4", 0, preise_custom, 0, 1);
         check_naive("custom_5", 1, preise_custom, 1, 3);
         check_naive("custom_6", 420, preise_custom, 420, 88831);
 
-        preise_custom = new long[] {0};
+        preise_custom = new long[]{0};
         check_naive("custom_7", -1, preise_custom, 0, 1);
         check_naive("custom_8", 0, preise_custom, 0, 1);
         check_naive("custom_9", 1, preise_custom, 0, 3);
@@ -67,13 +68,13 @@ public class StoffVerkaufenCustomTest extends StoffVerkaufenPublicTest {
         check_dp("custom_13", 1, preise_custom, 0);
         check_dp("custom_14", 420, preise_custom, 0);
 
-        preise_custom = new long[] {1};
+        preise_custom = new long[]{1};
         check_dp("custom_15", -1, preise_custom, 0);
         check_dp("custom_16", 0, preise_custom, 0);
         check_dp("custom_17", 1, preise_custom, 1);
         check_dp("custom_18", 420, preise_custom, 420);
 
-        preise_custom = new long[] {0};
+        preise_custom = new long[]{0};
         check_dp("custom_19", -1, preise_custom, 0);
         check_dp("custom_20", 0, preise_custom, 0);
         check_dp("custom_21", 1, preise_custom, 0);
