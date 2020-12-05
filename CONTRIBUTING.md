@@ -21,6 +21,7 @@
 * Every test method should start with `custom_METHOD_TO_TEST`
     * `customTest_methodA()`
     * `customTest_methodB()`
+* Configuration variables should be declared directly under the class signature
 
 
 ## Keep in mind
@@ -49,3 +50,4 @@ The code here is published under a [public domain license](./LICENSE). Please ma
 * Jede Test Methode solte wie folgt benannt werden `custom_METHOD_TO_TEST`
     * `customTest_methodA()`
     * `customTest_methodB()`
+* Konfigurationsvariablen sollten direkt nach der Klassensignatur deklariert werden
