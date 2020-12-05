@@ -1,10 +1,14 @@
-package uebung04;
+package arch.u042;
 
 import org.junit.*;
 
 import static org.junit.Assert.*;
 
-public class KenKenCustomTest {
+public class KenKenCustomTest extends KenKenPublicTest {
+
+    // == CONFIG ==
+    private final static boolean CHECK_9x9 = false;
+    // == CONFIG ==
 
     /**
      * Checks if the KenKen code is able to solve a bigger (and more complex) KenKen
@@ -13,6 +17,11 @@ public class KenKenCustomTest {
      */
     @Test
     public void customTest_exampleSolve9x9_0_full() {
+        if (!CHECK_9x9) {
+            assertEquals(true, false);
+            return;
+        }
+
         int[][][] testInputOrg = {
                 {{3, '-'}, {0, 0}, {0, 1}},
                 {{20, '*'}, {0, 2}, {0, 3}, {1, 3}},
@@ -73,6 +82,12 @@ public class KenKenCustomTest {
      */
     @Test
     public void customTest_exampleSolve9x9_0_white() {
+        if (!CHECK_9x9) {
+            assertEquals(true, false);
+            return;
+        }
+
+
         int[][][] testInputOrg = {
                 {{3, '-'}, {0, 0}, {0, 1}},
                 {{20, '*'}, {0, 2}, {0, 3}, {1, 3}},
@@ -128,6 +143,120 @@ public class KenKenCustomTest {
                 {2, 3, 5, 6, 4, 9, 1, 7, 8},
                 {1, 2, 8, 9, 3, 4, 5, 6, 7},
                 {7, 5, 4, 3, 2, 1, 6, 8, 9}
+        };
+        int[][][] testInput = deepCloneKenken(testInputOrg);
+        int[][] studentSolution = KenKen.solve(testInputOrg);
+        assertArrayEquals("kenkenExample: " + METHOD_NAME_KenKen_solve + " MODIFIED THE INPUT KenKen!", testInputOrg, testInput);
+        assertNotNull("kenkenExampleOriginal: has a solution, but " + METHOD_NAME_KenKen_solve + " didn't find it.", studentSolution);
+        assertArrayEquals("kenkenExampleOriginal: solution returned by " + METHOD_NAME_KenKen_solve + " is wrong.", expectedSolution, studentSolution);
+    }
+
+    /**
+     * 7x7 test; should work in a reasonable amount of time
+     */
+    @Test(timeout = 180000)
+    public void customTest_solve_7x7() {
+
+        int[][][] testInputOrg = new int[][][]{
+                {{13, '+'}, {0, 0}, {1, 0}, {2, 0}},
+                {{17, '+'}, {0, 1}, {0, 2}, {1, 1}, {1, 2}, {2, 2}},
+                {{11, '+'}, {0, 3}, {0, 4}, {0, 5}},
+                {{14, '+'}, {0, 6}, {1, 6}, {1, 5}},
+                {{1, '-'}, {1, 3}, {2, 3}},
+                {{14, '*'}, {1, 4}, {2, 4}},
+                {{2, '-'}, {2, 1}, {3, 1}},
+                {{120, '*'}, {2, 5}, {2, 6}, {3, 5}, {3, 6}, {4, 6}},
+                {{35, '*'}, {3, 0}, {4, 0}, {5, 0}},
+                {{126, '*'}, {3, 2}, {3, 3}, {3, 4}},
+                {{2, '-'}, {4, 1}, {5, 1}},
+                {{2, '/'}, {4, 2}, {5, 2}},
+                {{7, '+'}, {4, 3}, {4, 4}},
+                {{21, '*'}, {4, 5}, {5, 5}, {5, 4}},
+                {{25, '*'}, {5, 3}, {6, 3}, {6, 2}},
+                {{5, '-'}, {5, 6}, {6, 6}},
+                {{1, '-'}, {6, 0}, {6, 1}},
+                {{2, '-'}, {6, 4}, {6, 5}},
+        };
+        int[][] expectedSolution = { //
+                {3, 1, 7, 2, 5, 4, 6},
+                {6, 2, 1, 4, 7, 3, 5},
+                {4, 7, 6, 3, 2, 5, 1},
+                {1, 5, 3, 7, 6, 2, 4},
+                {5, 4, 2, 6, 1, 7, 3},
+                {7, 6, 4, 5, 3, 1, 2},
+                {2, 3, 5, 1, 4, 6, 7},
+        };
+        int[][][] testInput = deepCloneKenken(testInputOrg);
+        int[][] studentSolution = KenKen.solve(testInputOrg);
+        assertArrayEquals("kenkenExample: " + METHOD_NAME_KenKen_solve + " MODIFIED THE INPUT KenKen!", testInputOrg, testInput);
+        assertNotNull("kenkenExampleOriginal: has a solution, but " + METHOD_NAME_KenKen_solve + " didn't find it.", studentSolution);
+        assertArrayEquals("kenkenExampleOriginal: solution returned by " + METHOD_NAME_KenKen_solve + " is wrong.", expectedSolution, studentSolution);
+    }
+
+    /**
+     * 3x3 only addition / whitespace
+     */
+    @Test(timeout = 500)
+    public void customCheck3x3_add() {
+        int[][][] testInputOrg = {
+                {{5, '+'}, {0, 0}, {0, 1}},
+                {{1, ' '}, {0, 2}},
+                {{4, '+'}, {1, 0}, {2, 0}, {2, 1}},
+                {{5, '+'}, {1, 2}, {2, 2}},
+                {{3, ' '}, {1, 1}},
+        };
+        int[][] expectedSolution = { //
+                {3, 2, 1},
+                {1, 3, 2},
+                {2, 1, 3}
+        };
+        int[][][] testInput = deepCloneKenken(testInputOrg);
+        int[][] studentSolution = KenKen.solve(testInputOrg);
+        assertArrayEquals("kenkenExample: " + METHOD_NAME_KenKen_solve + " MODIFIED THE INPUT KenKen!", testInputOrg, testInput);
+        assertNotNull("kenkenExampleOriginal: has a solution, but " + METHOD_NAME_KenKen_solve + " didn't find it.", studentSolution);
+        assertArrayEquals("kenkenExampleOriginal: solution returned by " + METHOD_NAME_KenKen_solve + " is wrong.", expectedSolution, studentSolution);
+    }
+
+    /**
+     * 3x3 only addition / subtraction / whitespace
+     */
+    @Test(timeout = 500)
+    public void customCheck3x3_add_sub() {
+        int[][][] testInputOrg = {
+                {{5, '+'}, {0, 0}, {0, 1}},
+                {{2, '-'}, {0, 2}, {1, 2}},
+                {{1, '-'}, {1, 0}, {2, 0}},
+                {{2, '-'}, {1, 1}, {2, 1}},
+                {{2, ' '}, {2, 2}},
+        };
+        int[][] expectedSolution = { //
+                {3, 2, 1},
+                {2, 1, 3},
+                {1, 3, 2}
+        };
+        int[][][] testInput = deepCloneKenken(testInputOrg);
+        int[][] studentSolution = KenKen.solve(testInputOrg);
+        assertArrayEquals("kenkenExample: " + METHOD_NAME_KenKen_solve + " MODIFIED THE INPUT KenKen!", testInputOrg, testInput);
+        assertNotNull("kenkenExampleOriginal: has a solution, but " + METHOD_NAME_KenKen_solve + " didn't find it.", studentSolution);
+        assertArrayEquals("kenkenExampleOriginal: solution returned by " + METHOD_NAME_KenKen_solve + " is wrong.", expectedSolution, studentSolution);
+    }
+
+    /**
+     * 3x3 only multiplication / division / whitespace
+     */
+    @Test(timeout = 500)
+    public void customCheck3x3_mul_div() {
+        int[][][] testInputOrg = {
+                {{3, '/'}, {0, 0}, {1, 0}},
+                {{2, '/'}, {0, 1}, {0, 2}},
+                {{3, '*'}, {1, 1}, {2, 1}},
+                {{6, '*'}, {1, 2}, {2, 2}},
+                {{2, ' '}, {2, 0}},
+        };
+        int[][] expectedSolution = { //
+                {3, 2, 1},
+                {1, 3, 2},
+                {2, 1, 3}
         };
         int[][][] testInput = deepCloneKenken(testInputOrg);
         int[][] studentSolution = KenKen.solve(testInputOrg);
