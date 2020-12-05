@@ -1,5 +1,3 @@
-package arch.u042;
-
 import org.junit.*;
 
 import static org.junit.Assert.*;
@@ -7,7 +5,10 @@ import static org.junit.Assert.*;
 public class KenKenCustomTest extends KenKenPublicTest {
 
     // == CONFIG ==
+    // Enables / Disables 9x9
     private final static boolean CHECK_9x9 = false;
+    // Enables / Disables 7x7
+    private final static boolean CHECK_7x7 = false;
     // == CONFIG ==
 
     /**
@@ -16,7 +17,8 @@ public class KenKenCustomTest extends KenKenPublicTest {
      * Warning: can be up to 1hr if code is not effective.
      */
     @Test
-    public void customTest_exampleSolve9x9_0_full() {
+    public void customTest_solve_9x9_full() {
+
         if (!CHECK_9x9) {
             assertEquals(true, false);
             return;
@@ -81,7 +83,8 @@ public class KenKenCustomTest extends KenKenPublicTest {
      * => Can potentially help with debugging.
      */
     @Test
-    public void customTest_exampleSolve9x9_0_white() {
+    public void customTest_solve_9x9_white() {
+
         if (!CHECK_9x9) {
             assertEquals(true, false);
             return;
@@ -157,6 +160,11 @@ public class KenKenCustomTest extends KenKenPublicTest {
     @Test(timeout = 180000)
     public void customTest_solve_7x7() {
 
+        if (!CHECK_7x7) {
+            assertEquals(true, false);
+            return;
+        }
+
         int[][][] testInputOrg = new int[][][]{
                 {{13, '+'}, {0, 0}, {1, 0}, {2, 0}},
                 {{17, '+'}, {0, 1}, {0, 2}, {1, 1}, {1, 2}, {2, 2}},
@@ -197,7 +205,7 @@ public class KenKenCustomTest extends KenKenPublicTest {
      * 3x3 only addition / whitespace
      */
     @Test(timeout = 500)
-    public void customCheck3x3_add() {
+    public void customCheck_solve_3x3_add() {
         int[][][] testInputOrg = {
                 {{5, '+'}, {0, 0}, {0, 1}},
                 {{1, ' '}, {0, 2}},
@@ -221,7 +229,7 @@ public class KenKenCustomTest extends KenKenPublicTest {
      * 3x3 only addition / subtraction / whitespace
      */
     @Test(timeout = 500)
-    public void customCheck3x3_add_sub() {
+    public void customCheck_solve_3x3_add_sub() {
         int[][][] testInputOrg = {
                 {{5, '+'}, {0, 0}, {0, 1}},
                 {{2, '-'}, {0, 2}, {1, 2}},
@@ -245,7 +253,7 @@ public class KenKenCustomTest extends KenKenPublicTest {
      * 3x3 only multiplication / division / whitespace
      */
     @Test(timeout = 500)
-    public void customCheck3x3_mul_div() {
+    public void customCheck_solve_3x3_mul_div() {
         int[][][] testInputOrg = {
                 {{3, '/'}, {0, 0}, {1, 0}},
                 {{2, '/'}, {0, 1}, {0, 2}},
@@ -492,6 +500,38 @@ public class KenKenCustomTest extends KenKenPublicTest {
         //</editor-fold>
         assertEquals("2. KenKen does have overlapping partitions (one overlap)", 2, KenKen.checkValidity(badKenKenOverlappingOverlapInSamePartition));
 
+    }
+
+    /**
+     * Just another standard test
+     */
+    @Test(timeout = 6666)
+    public void customTest_solve_normal() {
+        int[][][] testInputOrg = { //
+                {{5, ' '}, {0, 0}}, //
+                {{1, '-'}, {0, 1}, {1, 1}}, //
+                {{32, '*'}, {0, 2}, {1, 2}, {1, 3}}, //
+                {{3, '/'}, {0, 3}, {0, 4}}, //
+                {{4, '/'}, {1, 0}, {2, 0}}, //
+                {{3, '-'}, {1, 4}, {2, 4}}, //
+                {{3, '/'}, {2, 2}, {2, 3}}, //
+                {{3, '+'}, {3, 3}, {3, 4}}, //
+                {{8, '+'}, {4, 2}, {4, 3}}, //
+                {{4, ' '}, {4, 4}}, //
+                {{600, '*'}, {2, 1}, {3, 1}, {4, 1}, {3, 0}, {4, 0}, {3, 2}} //
+        };
+        int[][] expectedSolution = { //
+                {5, 2, 4, 1, 3}, //
+                {1, 3, 2, 4, 5}, //
+                {4, 5, 1, 3, 2}, //
+                {3, 4, 5, 2, 1}, //
+                {2, 1, 3, 5, 4} //
+        };
+        int[][][] testInput = deepCloneKenken(testInputOrg);
+        int[][] studentSolution = KenKen.solve(testInputOrg);
+        assertArrayEquals("kenkenExample: " + METHOD_NAME_KenKen_solve + " MODIFIED THE INPUT KenKen!", testInputOrg, testInput);
+        assertNotNull("kenkenExampleOriginal: has a solution, but " + METHOD_NAME_KenKen_solve + " didn't find it.", studentSolution);
+        assertArrayEquals("kenkenExampleOriginal: solution returned by " + METHOD_NAME_KenKen_solve + " is wrong.", expectedSolution, studentSolution);
     }
 
 }
