@@ -1,8 +1,8 @@
 import org.junit.Test;
 
 /**
- * Extending the PublicTest invokes all the test; normally this shouldn't be a problem, but due to the random tests,<br>
- * this will change the time needed for every further test that relies on RND <br>
+ * Extending the PublicTest invokes all the tests in the superclass; normally this shouldn't be a problem,<br>
+ * but due to the random tests this will change the time needed for every further test that relies on randomness <br>
  * <i>Every PublicTest is affected by this!</i><br>
  * <b>THIS MAY LEAD TO PUBLIC TESTS TIMING OUT</b><br>
  * <i>This is not a problem in your code, just a side effect of the way we reuse the methods provided in the PublicTest</i><br>
