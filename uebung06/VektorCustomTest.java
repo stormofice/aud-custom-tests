@@ -291,7 +291,7 @@ public class VektorCustomTest {
         Vektor a = new Vektor(new double[]{-12838123, 1823812381238d});
         double[] exp = new double[]{-12838123 / 1.82381238128318485669266309716425701374440597468956972548062e12, 1823812381238d / 1.82381238128318485669266309716425701374440597468956972548062e12};
         a.normiere();
-        Assert.assertArrayEquals(exp, a.komponenten, 0);
+        Assert.assertArrayEquals(exp, a.komponenten, 0.000001);
     }
 
     @Test
