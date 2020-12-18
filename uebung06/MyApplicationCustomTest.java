@@ -56,6 +56,7 @@ public class MyApplicationCustomTest {
         ArrayList<String> methods = new ArrayList<>();
         methods.add(askdniu93p4n("84A77YXR0YWNoT2JzZXJ2ZXI="));
         methods.add(askdniu93p4n("BB6C7ZGV0YWNoT2JzZXJ2ZXI="));
+        methods.add(askdniu93p4n("JSD11cmVmcmVzaA=="));
 
         ArrayList<String> fields = new ArrayList<>();
         fields.add(askdniu93p4n("3ACF9TUFYX09CU0VSVkVS"));
