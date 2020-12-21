@@ -245,7 +245,7 @@ public class VektorCustomTest {
 
         matrix = new double[0][0];
         r = v.matrixVektorProdukt(matrix);
-        Assert.assertNull(r);
+        Assert.assertEquals(0,r.dimension());
 
         matrix = new double[][]{
                 {10, -1, 1283213, 21381283, -28},
@@ -257,7 +257,7 @@ public class VektorCustomTest {
         Assert.assertArrayEquals(new double[]{-3119931879205d, 102321041356956280d, 196363827881d}, r.komponenten, 0);
         matrix = new double[0][0];
         r = v.matrixVektorProdukt(matrix);
-        Assert.assertNull(r);
+        Assert.assertEquals(0,r.dimension());
     }
 
     @Test
