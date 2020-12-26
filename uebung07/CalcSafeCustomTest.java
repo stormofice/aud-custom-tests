@@ -216,7 +216,7 @@ public class CalcSafeCustomTest {
         }
         assertNotNull("Keine Exception obwohl Exception erwartert", working);
         assertEquals("keine Exception oder falsche Exception",
-                InexactIntegerArithmeticsException.class, working.getClass());
+                UnderOrOverflowException.class, working.getClass());
 
         working = null;
         try {
