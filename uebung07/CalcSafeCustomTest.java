@@ -215,7 +215,7 @@ public class CalcSafeCustomTest {
             working = e;
         }
         assertNotNull("Keine Exception obwohl Exception erwartert", working);
-        assertEquals("keine Exception oder falsche Exception",
+        assertEquals("keine Exception oder falsche Exception (dies ist zur zeit unklar, eventuell ergebnis dieses spezifischen tests ignorieren)",
                 UnderOrOverflowException.class, working.getClass());
 
         working = null;
