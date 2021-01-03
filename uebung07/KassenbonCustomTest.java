@@ -67,6 +67,14 @@ public class KassenbonCustomTest {
             if (alreadyThrown(thrown, e)) fail("Ausnahme8: Same exception multiple times");
             thrown.add(e);
         }
+        
+        System.out.println("==================================");
+        System.out.println("Thrown exceptions:");
+        for (Throwable e : thrown) {
+            e.printStackTrace();
+            System.out.println();
+        }
+        System.out.println("==================================");
 
         if (failedAt.size() > 0) {
             StringBuilder failedAtString = new StringBuilder(" ");
