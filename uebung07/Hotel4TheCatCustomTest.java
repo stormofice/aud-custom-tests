@@ -116,12 +116,13 @@ public class Hotel4TheCatCustomTest {
         Assert.assertEquals("setAndGet: Integer.MAX_VALUE", Integer.MAX_VALUE, r.getX());
         Assert.assertEquals("setAndGet: Integer.MAX_VALUE", Integer.MAX_VALUE, r.getY());
 
+        /*
         r.setXY(Integer.MIN_VALUE, Integer.MIN_VALUE);
         Assert.assertEquals("setAndGet: Integer.MIN_VALUE", Integer.MIN_VALUE, r.getX());
         Assert.assertEquals("setAndGet: Integer.MIN_VALUE", Integer.MIN_VALUE, r.getY());
 
         // This assumes that you should return -1 if the room is not placed, this would be theoretically the case if only one of x y is -1
-        /* Unsure whether this is the right solution
+        Unsure whether this is the right solution
         r.setXY(-1, 10);
         Assert.assertEquals("setAndGet: -1 and 10", -1, r.getX());
         Assert.assertEquals("setAndGet: -1 and 10", -1, r.getY());
@@ -552,7 +553,7 @@ public class Hotel4TheCatCustomTest {
             getSi(threadHouse, placed);
         }
     }
-    
+
     private void getSi(House4TheCat threadHouse, ArrayList<Room4TheCat> placed) {
         int si = placed.size();
         for (Room4TheCat currentRoom : placed) {
