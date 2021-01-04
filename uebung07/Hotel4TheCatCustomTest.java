@@ -23,28 +23,28 @@ public class Hotel4TheCatCustomTest {
         try {
             r = new Room4TheCat(-1, 1);
             Assert.fail("Don't modify the constructor (no exception)");
-        } catch (Throwable t) {
+        } catch (Exception t) {
             Assert.assertSame(IllegalArgumentException.class, t.getClass());
         }
 
         try {
             r = new Room4TheCat(1, -1);
             Assert.fail("Don't modify the constructor (no exception)");
-        } catch (Throwable t) {
+        } catch (Exception t) {
             Assert.assertSame(IllegalArgumentException.class, t.getClass());
         }
 
         try {
             r = new Room4TheCat(Integer.MIN_VALUE, 1);
             Assert.fail("Don't modify the constructor (no exception)");
-        } catch (Throwable t) {
+        } catch (Exception t) {
             Assert.assertSame(IllegalArgumentException.class, t.getClass());
         }
 
         try {
             r = new Room4TheCat(1, Integer.MIN_VALUE);
             Assert.fail("Don't modify the constructor (no exception)");
-        } catch (Throwable t) {
+        } catch (Exception t) {
             Assert.assertSame(IllegalArgumentException.class, t.getClass());
         }
 
@@ -59,28 +59,28 @@ public class Hotel4TheCatCustomTest {
         try {
             h = new House4TheCat(-1, 1);
             Assert.fail("Don't modify the constructor (no exception)");
-        } catch (Throwable t) {
+        } catch (Exception t) {
             Assert.assertSame(IllegalArgumentException.class, t.getClass());
         }
 
         try {
             h = new House4TheCat(1, -1);
             Assert.fail("Don't modify the constructor (no exception)");
-        } catch (Throwable t) {
+        } catch (Exception t) {
             Assert.assertSame(IllegalArgumentException.class, t.getClass());
         }
 
         try {
             h = new House4TheCat(Integer.MIN_VALUE, 1);
             Assert.fail("Don't modify the constructor (no exception)");
-        } catch (Throwable t) {
+        } catch (Exception t) {
             Assert.assertSame(IllegalArgumentException.class, t.getClass());
         }
 
         try {
             h = new House4TheCat(1, Integer.MIN_VALUE);
             Assert.fail("Don't modify the constructor (no exception)");
-        } catch (Throwable t) {
+        } catch (Exception t) {
             Assert.assertSame(IllegalArgumentException.class, t.getClass());
         }
 
@@ -116,13 +116,12 @@ public class Hotel4TheCatCustomTest {
         Assert.assertEquals("setAndGet: Integer.MAX_VALUE", Integer.MAX_VALUE, r.getX());
         Assert.assertEquals("setAndGet: Integer.MAX_VALUE", Integer.MAX_VALUE, r.getY());
 
-        /*
         r.setXY(Integer.MIN_VALUE, Integer.MIN_VALUE);
         Assert.assertEquals("setAndGet: Integer.MIN_VALUE", Integer.MIN_VALUE, r.getX());
         Assert.assertEquals("setAndGet: Integer.MIN_VALUE", Integer.MIN_VALUE, r.getY());
 
         // This assumes that you should return -1 if the room is not placed, this would be theoretically the case if only one of x y is -1
-        Unsure whether this is the right solution
+        /* Unsure whether this is the right solution
         r.setXY(-1, 10);
         Assert.assertEquals("setAndGet: -1 and 10", -1, r.getX());
         Assert.assertEquals("setAndGet: -1 and 10", -1, r.getY());
@@ -182,47 +181,45 @@ public class Hotel4TheCatCustomTest {
         for (int i = 1; i < 11; i++) {
             try {
                 h.canPlace(r, 40 + i, 0);
-                complain(1111);
-            } catch (Throwable t) {
+                Assert.fail("should have thrown an exception - x too big");
+            } catch (Exception t) {
                 Assert.assertSame("x too big", IllegalArgumentException.class, t.getClass());
             }
-        }
 
-        for (int i = 1; i < 11; i++) {
             try {
                 h.canPlace(r, 0, 40 + i);
-                complain(1112);
-            } catch (Throwable t) {
+                Assert.fail("should have thrown an exception - y too big");
+            } catch (Exception t) {
                 Assert.assertSame("y too big", IllegalArgumentException.class, t.getClass());
             }
         }
 
         try {
             h.canPlace(null, 0, 0);
-            complain(1113);
-        } catch (Throwable t) {
+            Assert.fail("should have thrown an exception - r is null");
+        } catch (Exception t) {
             Assert.assertSame("r is null", IllegalArgumentException.class, t.getClass());
         }
 
         try {
             h.canPlace(r, -1, 0);
-            complain(1114);
-        } catch (Throwable t) {
+            Assert.fail("should have thrown an exception - x is < 0");
+        } catch (Exception t) {
             Assert.assertSame("x is < 0", IllegalArgumentException.class, t.getClass());
         }
 
         try {
             h.canPlace(r, 0, -1);
-            complain(1115);
-        } catch (Throwable t) {
+            Assert.fail("should have thrown an exception - y is < 0");
+        } catch (Exception t) {
             Assert.assertSame("y is < 0", IllegalArgumentException.class, t.getClass());
         }
 
         try {
             Room4TheCat empty = new Room4TheCat(0, 0);
             h.canPlace(empty, 0, 0);
-        } catch (Throwable t) {
-            Assert.fail();
+        } catch (Exception t) {
+            Assert.fail("should not have thrown an exception");
         }
 
         r = new Room4TheCat(10, 10);
@@ -246,22 +243,22 @@ public class Hotel4TheCatCustomTest {
 
             try {
                 h.canPlace(r, mX, 0);
-                complain(1116);
-            } catch (Throwable t) {
+                Assert.fail("should have thrown an exception - mX: " + mX);
+            } catch (Exception t) {
                 Assert.assertSame("mX: " + mX, IllegalArgumentException.class, t.getClass());
             }
 
             try {
                 h.canPlace(r, 0, mY);
-                complain(1117);
-            } catch (Throwable t) {
+                Assert.fail("should have thrown an exception - mY: " + mY);
+            } catch (Exception t) {
                 Assert.assertSame("mY: " + mY, IllegalArgumentException.class, t.getClass());
             }
 
             try {
                 h.canPlace(r, mX, mY);
-                complain(1118);
-            } catch (Throwable t) {
+                Assert.fail("should have thrown an exception - mX: " + mX + " mY: " + mY);
+            } catch (Exception t) {
                 Assert.assertSame("mX: " + mX + " mY: " + mY, IllegalArgumentException.class, t.getClass());
             }
 
@@ -285,35 +282,35 @@ public class Hotel4TheCatCustomTest {
 
         try {
             house.getRoomAt(-1, 0);
-            complain(1211);
-        } catch (Throwable t) {
+            Assert.fail("should have thrown an exception - (-1;0)");
+        } catch (Exception t) {
             Assert.assertSame("(-1;0)", IllegalArgumentException.class, t.getClass());
         }
 
         try {
             house.getRoomAt(0, -1);
-            complain(1212);
-        } catch (Throwable t) {
+            Assert.fail("should have thrown an exception - (0;-1)");
+        } catch (Exception t) {
             Assert.assertSame("(0;-1)", IllegalArgumentException.class, t.getClass());
         }
 
         try {
             house.getRoomAt(128, 0);
-            complain(1213);
-        } catch (Throwable t) {
+            Assert.fail("should have thrown an exception - (128;0)");
+        } catch (Exception t) {
             Assert.assertSame("(128;0)", IllegalArgumentException.class, t.getClass());
         }
 
         try {
             house.getRoomAt(0, 128);
-            complain(1214);
-        } catch (Throwable t) {
+            Assert.fail("should have thrown an exception - (0;128)");
+        } catch (Exception t) {
             Assert.assertSame("(0;128)", IllegalArgumentException.class, t.getClass());
         }
 
         try {
             house.getRoomAt(127, 127);
-        } catch (Throwable t) {
+        } catch (Exception t) {
             Assert.fail("This should not lead to an exception");
         }
 
@@ -332,36 +329,36 @@ public class Hotel4TheCatCustomTest {
 
         try {
             house.place(null, 0, 0);
-            complain(1215);
-        } catch (Throwable t) {
+            Assert.fail("should have thrown an exception - r must not be null");
+        } catch (Exception t) {
             Assert.assertSame("r must not be null", IllegalArgumentException.class, t.getClass());
         }
 
         try {
             house.place(r, -1, 0);
-            complain(1216);
-        } catch (Throwable t) {
+            Assert.fail("should have thrown an exception - x must not be less than 0");
+        } catch (Exception t) {
             Assert.assertSame("x must not be less than 0", IllegalArgumentException.class, t.getClass());
         }
 
         try {
             house.place(r, 0, -1);
-            complain(1217);
-        } catch (Throwable t) {
+            Assert.fail("should have thrown an exception - y must not be less than 0");
+        } catch (Exception t) {
             Assert.assertSame("y must not be less than 0", IllegalArgumentException.class, t.getClass());
         }
 
         try {
             house.place(r, 119, 0);
-            complain(1218);
-        } catch (Throwable t) {
+            Assert.fail("should have thrown an exception - x + room width must not be greater than the house width");
+        } catch (Exception t) {
             Assert.assertSame("x + room width must not be greater than the house width", IllegalArgumentException.class, t.getClass());
         }
 
         try {
             house.place(r, 0, 119);
-            complain(1219);
-        } catch (Throwable t) {
+            Assert.fail("should have thrown an exception - y + room height must not be greater than the house height");
+        } catch (Exception t) {
             Assert.assertSame("y + room height must not be greater than the house height", IllegalArgumentException.class, t.getClass());
         }
 
@@ -418,15 +415,15 @@ public class Hotel4TheCatCustomTest {
 
         try {
             house.remove(null);
-            complain(1311);
-        } catch (Throwable t) {
+            Assert.fail("should have thrown an exception - r is null");
+        } catch (Exception t) {
             Assert.assertSame(IllegalArgumentException.class, t.getClass());
         }
 
         try {
             house.remove(room);
-            complain(1312);
-        } catch (Throwable t) {
+            Assert.fail("should have thrown an exception - r is not in the house");
+        } catch (Exception t) {
             Assert.assertSame(IllegalArgumentException.class, t.getClass());
         }
 
@@ -477,8 +474,8 @@ public class Hotel4TheCatCustomTest {
 
         try {
             room.placeNext(null);
-            complain(1411);
-        } catch (Throwable t) {
+            Assert.fail("should have thrown an exception - House must not be null");
+        } catch (Exception t) {
             Assert.assertSame("House must not be null", IllegalArgumentException.class, t.getClass());
         }
 
@@ -576,15 +573,15 @@ public class Hotel4TheCatCustomTest {
 
         try {
             house.placeAll(null);
-            complain(1511);
-        } catch (Throwable t) {
+            Assert.fail("should have thrown an exception - rs is null");
+        } catch (Exception t) {
             Assert.assertSame("Wrong exception type", IllegalArgumentException.class, t.getClass());
         }
 
         try {
             house.placeAll(new Room4TheCat[]{null});
-            complain(1512);
-        } catch (Throwable t) {
+            Assert.fail("should have thrown an exception - rs contains null");
+        } catch (Exception t) {
             Assert.assertSame("Wrong exception type", IllegalArgumentException.class, t.getClass());
         }
 
@@ -611,15 +608,6 @@ public class Hotel4TheCatCustomTest {
         return ThreadLocalRandom.current().nextInt(source, bound);
     }
 
-    // 'code' is just so you can search where this failed
-    private void complain(int code) {
-        System.err.println("=-=-=-= code=" + code);
-        for (int i = 0; i < 3; i++)
-            System.err.println("IT'S TIME TO STOP, IF YOU REACH THIS POINT THERE IS SOMETHING WRONG");
-        System.err.println("=-=-=-=");
-        Assert.fail();
-    }
-
     // for debug purposes
     private void printOutHouse(House4TheCat hc) {
         for (int i = 0; i < hc.getHeight(); i++) {
@@ -634,5 +622,4 @@ public class Hotel4TheCatCustomTest {
             System.out.println();
         }
     }
-
 }
