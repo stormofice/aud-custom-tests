@@ -15,6 +15,39 @@ public class Hotel4TheCatCustomTest {
     private final static boolean DYNAMIC_ALLOCATION = false;
 
     @Test(timeout = 50)
+    public void customTest_space_constructor() {
+
+        try {
+            House4TheCat h = new House4TheCat(0, 1);
+            Assert.fail("width/height zero not allowed");
+        } catch (Exception e) {
+            Assert.assertSame(IllegalArgumentException.class, e.getClass());
+        }
+
+        try {
+            House4TheCat h = new House4TheCat(1, 0);
+            Assert.fail("width/height zero not allowed");
+        } catch (Exception e) {
+            Assert.assertSame(IllegalArgumentException.class, e.getClass());
+        }
+
+        try {
+            Room4TheCat h = new Room4TheCat(0, 1);
+            Assert.fail("width/height zero not allowed");
+        } catch (Exception e) {
+            Assert.assertSame(IllegalArgumentException.class, e.getClass());
+        }
+
+        try {
+            Room4TheCat h = new Room4TheCat(1, 0);
+            Assert.fail("width/height zero not allowed");
+        } catch (Exception e) {
+            Assert.assertSame(IllegalArgumentException.class, e.getClass());
+        }
+
+    }
+
+    @Test(timeout = 50)
     public void customTest_room_constructor() {
         Room4TheCat r = new Room4TheCat(Integer.MAX_VALUE, Integer.MAX_VALUE);
         Assert.assertEquals("width and height, Integer.MAX_VALUE", Integer.MAX_VALUE, r.getWidth());
@@ -92,17 +125,29 @@ public class Hotel4TheCatCustomTest {
         House4TheCat h;
         for (int i = 0; i < (DYNAMIC_ALLOCATION ? 8192 : 1024); i++) {
 
-            int rndW = randomInt(1, (DYNAMIC_ALLOCATION ? Integer.MAX_VALUE : 1024));
-            int rndH = randomInt(1, (DYNAMIC_ALLOCATION ? Integer.MAX_VALUE : 1024));
+            int rndW = randomInt(0, (DYNAMIC_ALLOCATION ? Integer.MAX_VALUE : 1024));
+            int rndH = randomInt(0, (DYNAMIC_ALLOCATION ? Integer.MAX_VALUE : 1024));
 
-            r = new Room4TheCat(rndH, rndW);
-            h = new House4TheCat(rndH, rndW);
+            if (rndW == 0 || rndH == 0) {
+                try {
+                    r = new Room4TheCat(rndH, rndW);
+                    h = new House4TheCat(rndH, rndW);
+                    Assert.fail("room width/height zero not allowed");
+                } catch (Exception e) {
+                    Assert.assertSame(IllegalArgumentException.class, e.getClass());
+                }
+            } else {
 
-            Assert.assertEquals("constructor Room: " + rndW + " and " + rndH, rndW, r.getWidth());
-            Assert.assertEquals("constructor Room: " + rndW + " and " + rndH, rndH, r.getHeight());
+                r = new Room4TheCat(rndH, rndW);
+                h = new House4TheCat(rndH, rndW);
 
-            Assert.assertEquals("constructor House: " + rndW + " and " + rndH, rndW, h.getWidth());
-            Assert.assertEquals("constructor House: " + rndW + " and " + rndH, rndH, h.getHeight());
+                Assert.assertEquals("constructor Room: " + rndW + " and " + rndH, rndW, r.getWidth());
+                Assert.assertEquals("constructor Room: " + rndW + " and " + rndH, rndH, r.getHeight());
+
+                Assert.assertEquals("constructor House: " + rndW + " and " + rndH, rndW, h.getWidth());
+                Assert.assertEquals("constructor House: " + rndW + " and " + rndH, rndH, h.getHeight());
+            }
+
         }
     }
 
