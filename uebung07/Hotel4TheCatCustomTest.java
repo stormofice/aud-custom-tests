@@ -465,17 +465,7 @@ public class Hotel4TheCatCustomTest {
                 }
             }
 
-            int si = placed.size();
-            for (int pp = 0; pp < placed.size(); pp++) {
-                Room4TheCat currentRoom = placed.get(pp);
-                int prevX = currentRoom.getX();
-                int prevY = currentRoom.getY();
-                threadHouse.remove(currentRoom);
-                if (threadHouse.getRoomAt(prevX, prevY) == null)
-                    si--;
-            }
-
-            Assert.assertEquals("Couldn't remove all placed rooms", 0, si);
+            getSi(threadHouse, placed);
         }
     }
 
@@ -559,18 +549,21 @@ public class Hotel4TheCatCustomTest {
                 }
             }
 
-            int si = placed.size();
-            for (int pp = 0; pp < placed.size(); pp++) {
-                Room4TheCat currentRoom = placed.get(pp);
-                int prevX = currentRoom.getX();
-                int prevY = currentRoom.getY();
-                threadHouse.remove(currentRoom);
-                if (threadHouse.getRoomAt(prevX, prevY) == null)
-                    si--;
-            }
-
-            Assert.assertEquals("Couldn't remove all placed rooms", 0, si);
+            getSi(threadHouse, placed);
         }
+    }
+    
+    private void getSi(House4TheCat threadHouse, ArrayList<Room4TheCat> placed) {
+        int si = placed.size();
+        for (Room4TheCat currentRoom : placed) {
+            int prevX = currentRoom.getX();
+            int prevY = currentRoom.getY();
+            threadHouse.remove(currentRoom);
+            if (threadHouse.getRoomAt(prevX, prevY) == null)
+                si--;
+        }
+
+        Assert.assertEquals("Couldn't remove all placed rooms", 0, si);
     }
 
     @Test(timeout = 500)
@@ -634,7 +627,7 @@ public class Hotel4TheCatCustomTest {
                 if (r != null)
                     System.out.print(r.toString().substring(11) + ",");
                 else
-                    System.out.print(r + ",");
+                    System.out.print("null,");
 
             }
             System.out.println();
