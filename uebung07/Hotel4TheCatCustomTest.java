@@ -22,28 +22,28 @@ public class Hotel4TheCatCustomTest {
 
         try {
             r = new Room4TheCat(-1, 1);
-            Assert.fail("Don't modify the constructor (no exception)");
+            Assert.fail("no negative values allowed (no exception)");
         } catch (Exception t) {
             Assert.assertSame(IllegalArgumentException.class, t.getClass());
         }
 
         try {
             r = new Room4TheCat(1, -1);
-            Assert.fail("Don't modify the constructor (no exception)");
+            Assert.fail("no negative values allowed (no exception)");
         } catch (Exception t) {
             Assert.assertSame(IllegalArgumentException.class, t.getClass());
         }
 
         try {
             r = new Room4TheCat(Integer.MIN_VALUE, 1);
-            Assert.fail("Don't modify the constructor (no exception)");
+            Assert.fail("no negative values allowed (no exception)");
         } catch (Exception t) {
             Assert.assertSame(IllegalArgumentException.class, t.getClass());
         }
 
         try {
             r = new Room4TheCat(1, Integer.MIN_VALUE);
-            Assert.fail("Don't modify the constructor (no exception)");
+            Assert.fail("no negative values allowed (no exception)");
         } catch (Exception t) {
             Assert.assertSame(IllegalArgumentException.class, t.getClass());
         }
@@ -58,28 +58,28 @@ public class Hotel4TheCatCustomTest {
 
         try {
             h = new House4TheCat(-1, 1);
-            Assert.fail("Don't modify the constructor (no exception)");
+            Assert.fail("no negative values allowed (no exception)");
         } catch (Exception t) {
             Assert.assertSame(IllegalArgumentException.class, t.getClass());
         }
 
         try {
             h = new House4TheCat(1, -1);
-            Assert.fail("Don't modify the constructor (no exception)");
+            Assert.fail("no negative values allowed (no exception)");
         } catch (Exception t) {
             Assert.assertSame(IllegalArgumentException.class, t.getClass());
         }
 
         try {
             h = new House4TheCat(Integer.MIN_VALUE, 1);
-            Assert.fail("Don't modify the constructor (no exception)");
+            Assert.fail("no negative values allowed (no exception)");
         } catch (Exception t) {
             Assert.assertSame(IllegalArgumentException.class, t.getClass());
         }
 
         try {
             h = new House4TheCat(1, Integer.MIN_VALUE);
-            Assert.fail("Don't modify the constructor (no exception)");
+            Assert.fail("no negative values allowed (no exception)");
         } catch (Exception t) {
             Assert.assertSame(IllegalArgumentException.class, t.getClass());
         }
@@ -92,8 +92,8 @@ public class Hotel4TheCatCustomTest {
         House4TheCat h;
         for (int i = 0; i < (DYNAMIC_ALLOCATION ? 8192 : 1024); i++) {
 
-            int rndW = RND.nextInt((DYNAMIC_ALLOCATION ? Integer.MAX_VALUE : 1024));
-            int rndH = RND.nextInt((DYNAMIC_ALLOCATION ? Integer.MAX_VALUE : 1024));
+            int rndW = randomInt(1, (DYNAMIC_ALLOCATION ? Integer.MAX_VALUE : 1024));
+            int rndH = randomInt(1, (DYNAMIC_ALLOCATION ? Integer.MAX_VALUE : 1024));
 
             r = new Room4TheCat(rndH, rndW);
             h = new House4TheCat(rndH, rndW);
@@ -108,7 +108,7 @@ public class Hotel4TheCatCustomTest {
 
     @Test(timeout = 50)
     public void customTest_room_getX_getY_setXY() {
-        Room4TheCat r = new Room4TheCat(0, 0);
+        Room4TheCat r = new Room4TheCat(1, 1);
         Assert.assertEquals("Default values", -1, r.getX());
         Assert.assertEquals("Default values", -1, r.getY());
 
@@ -116,23 +116,64 @@ public class Hotel4TheCatCustomTest {
         Assert.assertEquals("setAndGet: Integer.MAX_VALUE", Integer.MAX_VALUE, r.getX());
         Assert.assertEquals("setAndGet: Integer.MAX_VALUE", Integer.MAX_VALUE, r.getY());
 
-        r.setXY(Integer.MIN_VALUE, Integer.MIN_VALUE);
-        Assert.assertEquals("setAndGet: Integer.MIN_VALUE", Integer.MIN_VALUE, r.getX());
-        Assert.assertEquals("setAndGet: Integer.MIN_VALUE", Integer.MIN_VALUE, r.getY());
+        try {
+            r.setXY(Integer.MIN_VALUE, Integer.MIN_VALUE);
+            Assert.fail("Exception expected (values < -1 not allowed)");
+        } catch (Exception e) {
+            Assert.assertSame(IllegalArgumentException.class, e.getClass());
+        }
 
-        // This assumes that you should return -1 if the room is not placed, this would be theoretically the case if only one of x y is -1
-        /* Unsure whether this is the right solution
-        r.setXY(-1, 10);
-        Assert.assertEquals("setAndGet: -1 and 10", -1, r.getX());
-        Assert.assertEquals("setAndGet: -1 and 10", -1, r.getY());
-        r.setXY(10, -1);
-        Assert.assertEquals("setAndGet: 10 and -1", -1, r.getX());
-        Assert.assertEquals("setAndGet: 10 and -1", -1, r.getY());*/
+
+        try {
+            r.setXY(1, -1);
+            Assert.fail("Exception expected (only one value negative not allowed)");
+        } catch (Exception e) {
+            Assert.assertSame(IllegalArgumentException.class, e.getClass());
+        }
+
+        try {
+            r.setXY(-1, 1);
+            Assert.fail("Exception expected (only one value negative not allowed)");
+        } catch (Exception e) {
+            Assert.assertSame(IllegalArgumentException.class, e.getClass());
+        }
+
+        try {
+            r.setXY(0, -1);
+            Assert.fail("Exception expected (only one value negative not allowed)");
+        } catch (Exception e) {
+            Assert.assertSame(IllegalArgumentException.class, e.getClass());
+        }
+
+        try {
+            r.setXY(-1, 0);
+            Assert.fail("Exception expected (only one value negative not allowed)");
+        } catch (Exception e) {
+            Assert.assertSame(IllegalArgumentException.class, e.getClass());
+        }
+
+        try {
+            r.setXY(-1, -1);
+            Assert.assertEquals(-1, r.getX());
+            Assert.assertEquals(-1, r.getY());
+        } catch (Exception e) {
+            Assert.fail("This shouldn't cause an exception");
+        }
+
+        try {
+            r.setXY(0, 0);
+            Assert.assertEquals(0, r.getX());
+            Assert.assertEquals(0, r.getY());
+        } catch (Exception e) {
+            Assert.fail("This shouldn't cause an exception");
+        }
+
+
     }
 
     @Test(timeout = 500)
     public void customTest_room_getX_getY_setXY_random() {
-        Room4TheCat r = new Room4TheCat(0, 0);
+        Room4TheCat r = new Room4TheCat(1, 1);
 
         for (int i = 0; i < 32768; i++) {
 
@@ -216,7 +257,7 @@ public class Hotel4TheCatCustomTest {
         }
 
         try {
-            Room4TheCat empty = new Room4TheCat(0, 0);
+            Room4TheCat empty = new Room4TheCat(1, 1);
             h.canPlace(empty, 0, 0);
         } catch (Exception t) {
             Assert.fail("should not have thrown an exception");
