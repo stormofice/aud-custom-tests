@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-// DISCLAIMER: What should happen when Room4TheCat values setXY are negative is not known at the moment
 public class Hotel4TheCatCustomTest {
 
     private final static Random RND = new Random();
