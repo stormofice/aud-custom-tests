@@ -92,6 +92,7 @@ public class UnendlicheDatenstrukturenCustomTest {
         Assert.assertEquals("[-36893488147419103228, ?]", Intervall.von(getNumberByString("-36893488147419103228")).toString());
 
         Assert.assertEquals("[1, ?]", Intervall.von(get(1)).bisMit(get(-1)).toString());
+        Assert.assertEquals("[-1, ?]", Intervall.von(get(-1)).bisMit(get(1)).mitSchrittweite(get(-1)).toString());
 
     }
 
