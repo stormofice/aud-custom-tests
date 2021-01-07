@@ -6,7 +6,7 @@ import java.math.BigInteger;
 import java.util.Stack;
 import java.util.stream.IntStream;
 
-// Disclaimer: It is unsure whether any of these expected results are correct, due to the vague task descriptions
+// Disclaimer: It is (kinda) unsure whether any of these expected results are correct, due to the vague task descriptions
 public class UnendlicheDatenstrukturenCustomTest {
 
     @Test(timeout = 15000)
@@ -38,10 +38,12 @@ public class UnendlicheDatenstrukturenCustomTest {
             test_collatz_termination(i, 0, null, 4, 2, 1);
         }
 
-        for (int i = 1; i < 4; i++) {
-            for (int k = 2; k < 256; k++) {
-                test_collatz_termination(k, i, null, 108, 54, 27);
-            }
+        for (int i = 2; i < 256; i++) {
+            test_collatz_termination(i, 1, null, 12, 6, 3);
+        }
+
+        for (int i = 2; i < 256; i++) {
+            test_collatz_termination(i, 2, null, 36, 18, 9);
         }
 
     }
