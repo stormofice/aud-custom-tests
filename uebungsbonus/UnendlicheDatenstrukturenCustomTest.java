@@ -6,7 +6,7 @@ import java.math.BigInteger;
 import java.util.Stack;
 import java.util.stream.IntStream;
 
-// Disclaimer: It is (kinda) unsure whether any of these expected results are correct, due to the vague task descriptions
+// Disclaimer: It is (kinda not that) unsure whether any of these expected results are correct, due to the vague task descriptions
 public class UnendlicheDatenstrukturenCustomTest {
 
     @Test(timeout = 15000)
@@ -94,9 +94,8 @@ public class UnendlicheDatenstrukturenCustomTest {
         Assert.assertEquals("[36893488147419103228, ?]", Intervall.von(getNumberByString("36893488147419103228")).toString());
         Assert.assertEquals("[-36893488147419103228, ?]", Intervall.von(getNumberByString("-36893488147419103228")).toString());
 
-        Assert.assertEquals("[1, ?]", Intervall.von(get(1)).bisMit(get(-1)).toString());
-        Assert.assertEquals("[-1, ?]", Intervall.von(get(-1)).bisMit(get(1)).mitSchrittweite(get(-1)).toString());
-
+        Assert.assertEquals("[]", Intervall.von(get(1)).bisMit(get(-1)).toString());
+        Assert.assertEquals("[]", Intervall.von(get(-1)).bisMit(get(1)).mitSchrittweite(get(-1)).toString());
     }
 
     @Test(timeout = 100)
