@@ -6,6 +6,7 @@ import java.math.BigInteger;
 import java.util.Stack;
 import java.util.stream.IntStream;
 
+// Disclaimer: It is unsure whether any of these expected results are correct, due to the vague task descriptions
 public class UnendlicheDatenstrukturenCustomTest {
 
     @Test(timeout = 15000)
