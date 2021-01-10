@@ -156,9 +156,6 @@ public class PresentAssignerCustomTest {
             gesVal += tester.values[i][result[i]];
         }
 
-        System.out.println(Arrays.toString(tester.prices));
-        System.out.println(Arrays.toString(tester.assignment));
-
         //falls erreichter Glückswert höher bitte Rückmeldung
         assertEquals("Maximaler Glückswert nicht erreicht!              Deine Endzuweisung ist: " + Arrays.toString(result), 2147509781L, gesVal);
     }
