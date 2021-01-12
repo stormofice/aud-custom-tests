@@ -142,13 +142,20 @@ public class NatListeAlgebraCustomTest {
     @Test(timeout = 420)
     public void customTest_Algebra_kleiner() {
         assertSame("121 kleiner 40", n[0], Algebra.kleiner(n[121], n[40]));
-        assertSame("42 kleiner 121", n[0], Nat.sub(n[1], Algebra.kleiner(n[42], n[121])));
+
+        Nat smaller = Algebra.kleiner(n[42], n[121]);
+        assertSame("42 kleiner 121", n[0], Nat.sub(n[1], smaller));
+        assertSame("42 kleiner 121", n[0], Nat.sub(smaller, n[1]));
+
         assertSame("42 kleiner 42", n[0], Algebra.kleiner(n[42], n[42]));
     }
 
     @Test(timeout = 420)
     public void customTest_Algebra_groesse() {
-        assertSame("121 groesser 40", n[0], Nat.sub(n[1], Algebra.groesser(n[121], n[40])));
+        Nat bigger = Algebra.groesser(n[121], n[40]);
+        assertSame("121 groesser 40", n[0], Nat.sub(n[1], bigger));
+        assertSame("121 groesser 40", n[0], Nat.sub(bigger, n[1]));
+
         assertSame("42 groesser 121", n[0], Algebra.groesser(n[42], n[121]));
         assertSame("42 groesser 42", n[0], Algebra.groesser(n[42], n[42]));
     }
