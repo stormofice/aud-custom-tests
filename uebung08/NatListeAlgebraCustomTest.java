@@ -156,7 +156,8 @@ public class NatListeAlgebraCustomTest {
     public void customTest_Algebra_fib() {
         int[] fib = {0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584};
         for (int i = 0; i <= 18; i++) {
-            assertEquals(i + "te Fibonaccizahl", fib[i], deCancer(Algebra.fib(n[i])));
+            assertSame(i + "te Fibonaccizahl", n[0], Nat.sub(n[fib[i]], Algebra.fib(n[i])));
+            assertSame(i + "te Fibonaccizahl", n[0], Nat.sub(Algebra.fib(n[i]), n[fib[i]]));
         }
     }
 
