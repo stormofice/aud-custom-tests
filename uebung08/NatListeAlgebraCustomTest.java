@@ -125,9 +125,18 @@ public class NatListeAlgebraCustomTest {
     @Test(timeout = 420)
     public void customTest_Algebra_modulo() {
         assertSame("0 modulo 1", n[0], Algebra.modulo(n[0], n[1])); // 0 modulo n = 0
+
         assertSame("2511 modulo 93", n[0], Algebra.modulo(n[2511], n[93]));
-        assertSame("121 modulo 40", n[0], Nat.sub(n[1], Algebra.modulo(n[121], n[40])));
-        assertSame("42 modulo 121", n[0], Nat.sub(n[42], Algebra.modulo(n[42], n[121])));
+
+
+        Nat mod = Algebra.modulo(n[121], n[40]);
+        assertSame("121 modulo 40", n[0], Nat.sub(n[1], mod));
+        assertSame("121 modulo 40", n[0], Nat.sub(mod, n[1]));
+
+        mod = Algebra.modulo(n[42], n[121]);
+        assertSame("42 modulo 121", n[0], Nat.sub(n[42], mod));
+        assertSame("42 modulo 121", n[0], Nat.sub(mod, n[42]));
+
         assertSame("12 modulo 12", n[0], Algebra.modulo(n[12], n[12]));
     }
 
@@ -149,7 +158,10 @@ public class NatListeAlgebraCustomTest {
     public void customTest_Algebra_gleich() {
         assertSame("121 gleich 40", n[0], Algebra.gleich(n[121], n[40]));
         assertSame("42 gleich 121", n[0], Algebra.gleich(n[42], n[121]));
-        assertSame("42 gleich 42", n[0], Nat.sub(n[1], Algebra.gleich(n[42], n[42])));
+
+        Nat eq = Algebra.gleich(n[42], n[42]);
+        assertSame("42 gleich 42", n[0], Nat.sub(n[1], eq));
+        assertSame("42 gleich 42", n[0], Nat.sub(eq, n[1]));
     }
 
     @Test(timeout = 420)
