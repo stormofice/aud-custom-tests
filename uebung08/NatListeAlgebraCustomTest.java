@@ -154,8 +154,8 @@ public class NatListeAlgebraCustomTest {
 
     @Test(timeout = 420)
     public void customTest_Algebra_fib() {
-        int[] fib = {0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765};
-        for (int i = 0; i <= 20; i++) {
+        int[] fib = {0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584};
+        for (int i = 0; i <= 18; i++) {
             assertEquals(i + "te Fibonaccizahl", fib[i], deCancer(Algebra.fib(n[i])));
         }
     }
@@ -163,9 +163,18 @@ public class NatListeAlgebraCustomTest {
 
     @Test(timeout = 420)
     public void customTest_Algebra_kgV() {
-        assertEquals("kgV 673 und 12", 8076, deCancer(Algebra.kgv(n[673], n[12])));
-        assertEquals("kgV 12 und 673", 8076, deCancer(Algebra.kgv(n[12], n[673])));
-        assertEquals("kgV 73 und 73", 73, deCancer(Algebra.kgv(n[73], n[73])));
+        Nat kgv = Algebra.kgv(n[673], n[12]);
+        assertSame("kgV 673 und 12", n[0], Nat.sub(kgv, n[8076]));
+        assertSame("kgV 673 und 12", n[0], Nat.sub(n[8076], kgv));
+
+        kgv = Algebra.kgv(n[673], n[12]);
+        assertSame("kgV 12 und 673", n[0], Nat.sub(kgv, n[8076]));
+        assertSame("kgV 12 und 673", n[0], Nat.sub(n[8076], kgv));
+
+        kgv = Algebra.kgv(n[73], n[73]);
+        assertSame("kgV 73 und 73", n[0], Nat.sub(kgv, n[73]));
+        assertSame("kgV 73 und 73", n[0], Nat.sub(n[73], kgv));
+
         assertSame("kgV 0 und 12", n[0], Algebra.kgv(n[0], n[12])); //kgV(0, n) = 0
         assertSame("kgV 12 und 0", n[0], Algebra.kgv(n[12], n[0]));
         assertSame("kgV 0 und 0", n[0], Algebra.kgv(n[0], n[0]));
