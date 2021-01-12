@@ -128,7 +128,6 @@ public class NatListeAlgebraCustomTest {
 
         assertSame("2511 modulo 93", n[0], Algebra.modulo(n[2511], n[93]));
 
-
         Nat mod = Algebra.modulo(n[121], n[40]);
         assertSame("121 modulo 40", n[0], Nat.sub(n[1], mod));
         assertSame("121 modulo 40", n[0], Nat.sub(mod, n[1]));
