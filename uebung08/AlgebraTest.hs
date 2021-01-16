@@ -1,5 +1,6 @@
 -- How to use:
 -- Copy paste the following into your own Haskell implementation
+-- This does *not* use 'Nat' to represent Integers, so keep in mind that your axioms need to compare with zero and not one
 main = do
     let kleinerKlein = kleiner 5 10 --0
     let kleinerGross = kleiner 10 5 --1
