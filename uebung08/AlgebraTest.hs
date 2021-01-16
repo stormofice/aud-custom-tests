@@ -4,13 +4,17 @@
 main = do
     let kleinerKlein = kleiner 5 10 --0
     let kleinerGross = kleiner 10 5 --1
+    let kleinerSame = kleiner 1 1 --0
     if kleinerKlein == 0 then putStrLn "Test passed: kleiner 5 10" else putStrLn "Test failed: kleiner 5 10"
     if kleinerGross == 1 then putStrLn "Test passed: kleiner 10 5" else putStrLn "Test failed: kleiner 10 5"
-    
+    if kleinerSame == 1 then putStrLn "Test passed: kleiner 1 1" else putStrLn "Test failed: kleiner 1 1"
+   
     let groesserKlein = groesser 5 10 --1
     let groesserGross = groesser 10 5 --0
+    let groesserSame = groesser 1 1 --0
     if groesserKlein == 1 then putStrLn "Test passed: groesser 5 10" else putStrLn "Test failed: groesser 5 10"
     if groesserGross == 0 then putStrLn "Test passed: groesser 10 5" else putStrLn "Test failed: groesser 10 5"    
+    if groesserSame == 0 then putStrLn "Test passed: groesser 1 1" else putStrLn "Test failed: groesser 1 1"    
 
     let moduloZeroFirst = modulo 5 0 --0
     let moduloZeroLast = modulo 0 5 --0
