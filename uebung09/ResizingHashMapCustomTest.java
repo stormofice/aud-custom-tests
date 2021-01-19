@@ -83,6 +83,42 @@ public class ResizingHashMapCustomTest {
     public void customTest_insertMapping() {
         createInsertMap(false);
     }
+    
+    @Test(timeout = 100)
+    public void customTest_insertMultipleMappings() {
+        ResizingHashMap<String, Integer> sampleTestMap = new ResizingHashMap<>(1);
+        int expectedSize = 0;
+        sampleTestMap.insertMapping(0, null);
+        Assert.assertEquals("insertMultipleMappings: wrong size after inserting null", expectedSize, sampleTestMap.size());
+        String testObjectMappingKey = getRandomString(16);
+        sampleTestMap.put(testObjectMappingKey, expectedSize++);
+        Assert.assertEquals("insertMultipleMappings: wrong size after put element", expectedSize, sampleTestMap.size());
+        sampleTestMap.insertMapping(0, null);
+        Assert.assertEquals("insertMultipleMappings: wrong size after inserting null", expectedSize, sampleTestMap.size());
+        sampleTestMap.remove(testObjectMappingKey);
+        Assert.assertEquals("insertMultipleMappings: wrong size after removing element", --expectedSize, sampleTestMap.size());
+
+        Mapping<String, Integer> multipleMappings = new Mapping<>(getRandomString(16), ThreadLocalRandom.current().nextInt(16), null);
+        Mapping<String, Integer> lastOfMultipleMappings = multipleMappings;
+        expectedSize++;
+        for (int i = 0; i < 5; i++) {
+            expectedSize++;
+            multipleMappings = new Mapping<>(getRandomString(16), ThreadLocalRandom.current().nextInt(16), multipleMappings);
+        }
+        sampleTestMap.insertMapping(0, multipleMappings);
+        Assert.assertEquals("insertMultipleMappings: wrong size after inserting multiple mappings", expectedSize, sampleTestMap.size());
+        Assert.assertEquals("insertMultipleMappings: wrong mapping in Bucket", sampleTestMap.buckets[0], multipleMappings);
+
+        multipleMappings = new Mapping<>(getRandomString(16), ThreadLocalRandom.current().nextInt(16), null);
+        expectedSize++;
+        for (int i = 0; i < 5; i++) {
+            expectedSize++;
+            multipleMappings = new Mapping<>(getRandomString(16), ThreadLocalRandom.current().nextInt(16), multipleMappings);
+        }
+        sampleTestMap.insertMapping(0, multipleMappings);
+        Assert.assertEquals("insertMultipleMappings: wrong size after inserting multiple mappings", expectedSize, sampleTestMap.size());
+        Assert.assertEquals("insertMultipleMappings: insertMapping didn't append correctly to the bucket", lastOfMultipleMappings.next, multipleMappings);
+    }
 
     @Test(timeout = 100)
     public void customTest_getMapping() {
@@ -229,7 +265,7 @@ public class ResizingHashMapCustomTest {
         for (int i = 0; i < 64; i++) {
             int newSize = ThreadLocalRandom.current().nextInt(0, 2048);
 
-            if (newSize <= 0 || newSize < sample.buckets.length) {
+            if (newSize <= 0 || newSize <= sample.buckets.length) {
                 try {
                     sample.resize(newSize);
                     Assert.fail("resize: exception expected");
