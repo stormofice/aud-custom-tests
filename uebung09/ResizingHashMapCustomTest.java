@@ -53,10 +53,21 @@ public class ResizingHashMapCustomTest {
             int capacity = ThreadLocalRandom.current().nextInt(1, 4096);
             ResizingHashMap<String, Integer> test = new ResizingHashMap<>(capacity);
             String key = getRandomString(512);
-            int hashCode = key.hashCode();
-            if (hashCode < 0)
-                hashCode = -hashCode;
-            Assert.assertEquals("getBucketIndex: bucket index differed", hashCode % capacity, test.getBucketIndex(key));
+
+            test.put(key, 69);
+            int index = -1;
+
+            for (int j = 0; j < test.buckets.length; j++) {
+                if(test.buckets[j] != null && test.buckets[j].getValue() == 69) {
+                    index = j;
+                    break;
+                }
+            }
+
+            int actualIndex = test.getBucketIndex(key);
+
+            Assert.assertNotEquals("should have placed mapping", -1, actualIndex);
+            Assert.assertEquals("getBucketIndex: bucket index differed", index, test.getBucketIndex(key));
         }
 
         try {
