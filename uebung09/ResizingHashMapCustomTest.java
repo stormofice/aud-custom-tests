@@ -160,7 +160,7 @@ public class ResizingHashMapCustomTest {
             lifesad.put(null, 1);
             Assert.fail("put: key was null");
         } catch (Exception e) {
-            Assert.assertSame("put: wrong exeption thrown", IllegalArgumentException.class, e.getClass());
+            Assert.assertSame("put: wrong exception thrown", IllegalArgumentException.class, e.getClass());
         }
 
     }
