@@ -7,6 +7,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class ResizingHashMapCustomTest {
 
+    // == CONFIG ==
+    public static final boolean CHECK_MEMORY_ERROR = false;
+
     @Test(timeout = 100)
     public void customTest_constructor() {
 
@@ -24,10 +27,12 @@ public class ResizingHashMapCustomTest {
             Assert.assertSame("Constructor: wrong exception thrown", IllegalArgumentException.class, e.getClass());
         }
 
-        try {
-            new ResizingHashMap<String, Integer>(Integer.MAX_VALUE);
-        } catch (Error e) {
-            Assert.assertSame("Constructor: wrong error created", OutOfMemoryError.class, e.getClass());
+        if(CHECK_MEMORY_ERROR) {
+            try {
+                new ResizingHashMap<String, Integer>(Integer.MAX_VALUE);
+            } catch (Error e) {
+                Assert.assertSame("Constructor: wrong error created", OutOfMemoryError.class, e.getClass());
+            }
         }
 
         ResizingHashMap<String, Integer> sizeTest;
