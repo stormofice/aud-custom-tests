@@ -134,30 +134,30 @@ public class ResizingHashMapCustomTest {
     @Test(timeout = 50)
     public void customTest_put() {
 
-        ResizingHashMap<String, Integer> lifesad = new ResizingHashMap<>(128);
+        ResizingHashMap<String, Integer> lifeSad = new ResizingHashMap<>(128);
 
         HashMap<String, Integer> expected = new HashMap<>();
         for (int i = 0; i < 2048; i++) {
             String rand = getRandomString(512);
             int number = ThreadLocalRandom.current().nextInt(256);
             expected.put(rand, number);
-            Assert.assertTrue("put: key was not in map", lifesad.put(rand, number));
-            Assert.assertEquals("put: size did not increase", i + 1, lifesad.size());
+            Assert.assertTrue("put: key was not in map", lifeSad.put(rand, number));
+            Assert.assertEquals("put: size did not increase", i + 1, lifeSad.size());
         }
 
         for (String s : expected.keySet()) {
-            Assert.assertEquals("put: value was not in map", expected.get(s), lifesad.get(s));
-            Assert.assertTrue("put: value was not in map", lifesad.containsKey(s));
-            Assert.assertFalse("put: key was already in map", lifesad.put(s, expected.get(s)));
+            Assert.assertEquals("put: value was not in map", expected.get(s), lifeSad.get(s));
+            Assert.assertTrue("put: value was not in map", lifeSad.containsKey(s));
+            Assert.assertFalse("put: key was already in map", lifeSad.put(s, expected.get(s)));
 
             expected.replace(s, ThreadLocalRandom.current().nextInt(4096));
-            Assert.assertFalse("put: key was already in map, only update", lifesad.put(s, expected.get(s)));
-            Assert.assertEquals("put: key was not properly updated", expected.get(s), lifesad.get(s));
+            Assert.assertFalse("put: key was already in map, only update", lifeSad.put(s, expected.get(s)));
+            Assert.assertEquals("put: key was not properly updated", expected.get(s), lifeSad.get(s));
         }
 
 
         try {
-            lifesad.put(null, 1);
+            lifeSad.put(null, 1);
             Assert.fail("put: key was null");
         } catch (Exception e) {
             Assert.assertSame("put: wrong exception thrown", IllegalArgumentException.class, e.getClass());
@@ -167,21 +167,21 @@ public class ResizingHashMapCustomTest {
 
     @Test(timeout = 50)
     public void customTest_remove() {
-        ResizingHashMap<String, Integer> liveverysad = new ResizingHashMap<>(128);
+        ResizingHashMap<String, Integer> liveVerySad = new ResizingHashMap<>(128);
         for (int i = 0; i < 2048; i++) {
             String rand = getRandomString(512);
             int number = ThreadLocalRandom.current().nextInt(256);
-            liveverysad.put(rand, number);
-            Assert.assertTrue("remove: key should have been removed", liveverysad.remove(rand));
-            Assert.assertEquals("remove: size should stay at zero", 0, liveverysad.size);
+            liveVerySad.put(rand, number);
+            Assert.assertTrue("remove: key should have been removed", liveVerySad.remove(rand));
+            Assert.assertEquals("remove: size should stay at zero", 0, liveVerySad.size);
         }
 
         for (int i = 0; i < 512; i++) {
-            Assert.assertFalse("remove: key should have been removed", liveverysad.remove(getRandomString(16)));
+            Assert.assertFalse("remove: key should have been removed", liveVerySad.remove(getRandomString(16)));
         }
 
         try {
-            liveverysad.remove(null);
+            liveVerySad.remove(null);
             Assert.fail("remove: exception expected");
         } catch (Exception e) {
             Assert.assertSame("remove: wrong exception thrown", IllegalArgumentException.class, e.getClass());
