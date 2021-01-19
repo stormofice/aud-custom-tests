@@ -1,12 +1,8 @@
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class ResizingHashMapCustomTest {
@@ -238,30 +234,6 @@ public class ResizingHashMapCustomTest {
 
     }
 
-    @Test(timeout = 50)
-    public void customTest_import() {
-        // == Kind of experimental ==
-        File out = walk(new File("" + System.getProperty("user.dir")), 0);
-
-        if (out == null) {
-            System.out.println("[WARN] Exercise file was not found, import checking unavailable");
-            return;
-        }
-
-        try {
-            List<String> code = Files.readAllLines(out.toPath());
-            for (String currentLine : code) {
-                if (currentLine.contains("import"))
-                    Assert.fail("import: not allowed -> " + currentLine);
-                if (currentLine.contains("public class"))
-                    break;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
     private void createInsertMap(boolean checkGet) {
         ResizingHashMap<String, Integer> sampleTestMap = new ResizingHashMap<>(16);
 
@@ -313,13 +285,6 @@ public class ResizingHashMapCustomTest {
             }
 
             try {
-                sampleTestMap.insertMapping(0, null);
-                Assert.fail("insertMapping: exception expected, mapping was null");
-            } catch (Exception e) {
-                Assert.assertSame("insertMapping: wrong type of exception thrown", IllegalArgumentException.class, e.getClass());
-            }
-
-            try {
                 sampleTestMap.insertMapping(-1, new Mapping<>("", 0, null));
                 Assert.fail("insertMapping: exception expected, index was negative");
             } catch (Exception e) {
@@ -349,25 +314,6 @@ public class ResizingHashMapCustomTest {
         }
 
         return mappings;
-    }
-
-    private File walk(File visit, int depth) {
-        // :emergency:
-        if (depth > 5)
-            return null;
-
-        if (visit.isDirectory()) {
-            for (File f : visit.listFiles()) {
-                File lastVisit = walk(f, depth + 1);
-                if (lastVisit != null)
-                    return lastVisit;
-            }
-        } else {
-            if (visit.getName().equals("ResizingHashMapCustomTest.java"))
-                return visit;
-        }
-
-        return null;
     }
 
     private String getRandomString(int length) {
