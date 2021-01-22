@@ -23,7 +23,7 @@ main = do
     assert "getX/getY with two steps" (getX (Step(Step(New W))), getY (Step(Step(New W)))) (-1, 1)
     assert "getX/getY with three steps" (getX (Step(Step(Step(New N)))), getY (Step(Step(Step(New N))))) (1, 0)
     
-	putStrLn "===================================================="
+    putStrLn "===================================================="
     assert "getCol with New" (getCol (New W) 42 69) WHITE
     assert "getCol with one step" (getCol (Step(New N)) 0 0, getCol (Step(New N)) 0 1) (BLACK, WHITE)
     assert "getCol with two steps" (getCol (Step(Step(New S))) 0 0, getCol (Step(Step(New S))) 0 (-1), 
