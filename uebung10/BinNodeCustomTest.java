@@ -234,6 +234,146 @@ public class BinNodeCustomTest {
         return start;
     }
 
+    private AbstractBinNode<String> customGeneralTree() {
+        // Contains null values and nodes with 3 children
+        // __________a____________
+        // ______//______\________
+        // _____b==========c______
+        // ___//_\______//_|_\____
+        // ___d==null___f==g==h____
+        // -//|\---------//-------
+        // -p=t=z------null------
+        BinNode<String> f = new BinNode<>("f", null, new BinNode<>("g", new BinNode<>(null, null, null), new BinNode<>("h", null, null)));
+        BinNode<String> z = new BinNode<>("z", null, null);
+        BinNode<String> t = new BinNode<>("t", null, z);
+        BinNode<String> p = new BinNode<>("p", null, t);
+        BinNode<String> d = new BinNode<>("d", p, new BinNode<>(null, null, null));
+        BinNode<String> c = new BinNode<>("c", f, null);
+        BinNode<String> b = new BinNode<>("b", d, c);
+        return new BinNode<>("a", b, null);
+    }
+
+    private AbstractBinNode<Integer> customBinarySearchTree() {
+        // Just a plain old bin search tree
+        // __________7__________
+        // ______//_____\_______
+        // _____5=======12______
+        // ___//_______//_\_____
+        // ___3_______9====17____
+        BinNode<Integer> three = new BinNode<>(3, null, null);
+        BinNode<Integer> seventeen = new BinNode<>(17, null, null);
+        BinNode<Integer> nine = new BinNode<>(9, null, seventeen);
+        BinNode<Integer> twelve = new BinNode<>(12, nine, null);
+        BinNode<Integer> five = new BinNode<>(5, three, twelve);
+        return new BinNode<>(7, five, null);
+    }
+
+    private AbstractBinNode<Integer> customBinarySearchTree2() {
+        // A bin search tree where one node has only a right child
+        // __________7__________
+        // ______//_____\_______
+        // _____5=======12______
+        // ___//__________\\_____
+        // ___3____________17____
+        BinNode<Integer> three = new BinNode<>(3, null, null);
+        BinNode<Integer> seventeen = new BinNode<>(17, null, null);
+        BinNode<Integer> twelve = new BinNode<>(12, seventeen, null);
+        BinNode<Integer> five = new BinNode<>(5, three, twelve);
+        return new BinNode<>(7, five, null);
+    }
+
+    private AbstractBinNode<Integer> customBinaryNotSearchTree() {
+        // A binary tree thats not a binary search tree
+        // __________7__________
+        // ______//_____\_______
+        // _____5=======12______
+        // ___//_______//_\_____
+        // ___3______19====17___
+        // ---------------//----
+        // --------------28-----
+        BinNode<Integer> three = new BinNode<>(3, null, null);
+        BinNode<Integer> twentyeight = new BinNode<>(28, null, null);
+        BinNode<Integer> seventeen = new BinNode<>(17, twentyeight, null);
+        BinNode<Integer> nineteen = new BinNode<>(19, null, seventeen);
+        BinNode<Integer> twelve = new BinNode<>(12, nineteen, null);
+        BinNode<Integer> five = new BinNode<>(5, three, twelve);
+        return new BinNode<>(7, five, null);
+    }
+
+    private AbstractBinNode<Integer> customBinaryNotSearchTree2() {
+        // Another binary tree thats not a binary search tree
+        // __________7__________
+        // ______//_____\_______
+        // _____5=======12______
+        // ___//_______//_\_____
+        // ___3_______6====17___
+        // ---------------//----
+        // --------------4-----
+        BinNode<Integer> three = new BinNode<>(3, null, null);
+        BinNode<Integer> four = new BinNode<>(4, null, null);
+        BinNode<Integer> seventeen = new BinNode<>(17, four, null);
+        BinNode<Integer> six = new BinNode<>(6, null, seventeen);
+        BinNode<Integer> twelve = new BinNode<>(12, six, null);
+        BinNode<Integer> five = new BinNode<>(5, three, twelve);
+        return new BinNode<>(7, five, null);
+    }
+
+    @Test(timeout = 20)
+    public void customTest_generalTee() {
+        assertTrue("isTree() returned false", customGeneralTree().isTree());
+
+        assertFalse("isBinarySearchTree() returned true", customGeneralTree().isBinaryTree());
+        assertFalse("isBinarySearchTree() returned true", customGeneralTree().isBinarySearchTree());
+        assertFalse("isMaxHeap() returned true", customGeneralTree().isMaxHeap());
+        assertFalse("isMinHeap() returned true", customGeneralTree().isMinHeap());
+        assertFalse("isAVLTree() returned true", customGeneralTree().isAVLTree());
+
+        assertEquals("Wrong tree height returned:", 3, customGeneralTree().getHeight());
+        assertEquals("Wrong branching factor returned:", 3, customGeneralTree().getBranchingFactor());
+    }
+
+    @Test(timeout = 20)
+    public void customTest_binarySearchTree() {
+        assertTrue("isTree() returned false", customBinarySearchTree().isTree());
+        assertTrue("isBinaryTree() returned false", customBinarySearchTree().isBinaryTree());
+        assertTrue("isBinarySearchTree() returned false", customBinarySearchTree().isBinarySearchTree());
+        assertTrue("isAVLTree() returned false", customBinarySearchTree().isAVLTree());
+
+        assertFalse("isMinHeap() returned true", customBinarySearchTree().isMinHeap());
+        assertFalse("isMaxHeap() returned true", customBinarySearchTree().isMaxHeap());
+
+        assertEquals("Wrong tree height returned:", 2, customBinarySearchTree().getHeight());
+        assertEquals("Wrong branching factor returned:", 2, customBinarySearchTree().getBranchingFactor());
+    }
+
+    @Test(timeout = 20)
+    public void customTest_binaryNotSearchTree() {
+        assertTrue("isTree() returned false", customBinaryNotSearchTree().isTree());
+        assertTrue("isBinaryTree() returned false", customBinaryNotSearchTree().isBinaryTree());
+
+        assertFalse("isBinarySearchTree() returned true", customBinaryNotSearchTree().isBinarySearchTree());
+        assertFalse("isMinHeap() returned true", customBinaryNotSearchTree().isMinHeap());
+        assertFalse("isMaxHeap() returned true", customBinaryNotSearchTree().isMaxHeap());
+        assertFalse("isAVLTree() returned true", customBinaryNotSearchTree().isAVLTree());
+
+        assertEquals("Wrong tree height returned:", 3, customBinaryNotSearchTree().getHeight());
+        assertEquals("Wrong branching factor returned:", 2, customBinaryNotSearchTree().getBranchingFactor());
+    }
+
+    @Test(timeout = 20)
+    public void customTest_binaryNotSearchTree2() {
+        assertTrue("isTree() returned false", customBinaryNotSearchTree2().isTree());
+        assertTrue("isBinaryTree() returned false", customBinaryNotSearchTree2().isBinaryTree());
+
+        assertFalse("isBinarySearchTree() returned true", customBinaryNotSearchTree2().isBinarySearchTree());
+        assertFalse("isMinHeap() returned true", customBinaryNotSearchTree2().isMinHeap());
+        assertFalse("isMaxHeap() returned true", customBinaryNotSearchTree2().isMaxHeap());
+        assertFalse("isAVLTree() returned true", customBinaryNotSearchTree2().isAVLTree());
+
+        assertEquals("Wrong tree height returned:", 3, customBinaryNotSearchTree2().getHeight());
+        assertEquals("Wrong branching factor returned:", 2, customBinaryNotSearchTree2().getBranchingFactor());
+    }
+
     @Test(timeout = 20)
     public void customTest_treeList() {
         assertTrue("isTree() returned false", linkedListAsTree().isTree());
