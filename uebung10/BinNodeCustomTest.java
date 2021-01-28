@@ -243,11 +243,11 @@ public class BinNodeCustomTest {
         // ___d==null___f==g==h____
         // -//|\---------//-------
         // -p=t=z------null------
-        BinNode<String> f = new BinNode<>("f", null, new BinNode<>("g", new BinNode<>(null, null, null), new BinNode<>("h", null, null)));
+        BinNode<String> f = new BinNode<>("f", null, new BinNode<String>("g", new BinNode<String>(null, null, null), new BinNode<String>("h", null, null)));
         BinNode<String> z = new BinNode<>("z", null, null);
         BinNode<String> t = new BinNode<>("t", null, z);
         BinNode<String> p = new BinNode<>("p", null, t);
-        BinNode<String> d = new BinNode<>("d", p, new BinNode<>(null, null, null));
+        BinNode<String> d = new BinNode<>("d", p, new BinNode<String>(null, null, null));
         BinNode<String> c = new BinNode<>("c", f, null);
         BinNode<String> b = new BinNode<>("b", d, c);
         return new BinNode<>("a", b, null);
@@ -264,20 +264,6 @@ public class BinNodeCustomTest {
         BinNode<Integer> seventeen = new BinNode<>(17, null, null);
         BinNode<Integer> nine = new BinNode<>(9, null, seventeen);
         BinNode<Integer> twelve = new BinNode<>(12, nine, null);
-        BinNode<Integer> five = new BinNode<>(5, three, twelve);
-        return new BinNode<>(7, five, null);
-    }
-
-    private AbstractBinNode<Integer> customBinarySearchTree2() {
-        // A bin search tree where one node has only a right child
-        // __________7__________
-        // ______//_____\_______
-        // _____5=======12______
-        // ___//__________\\_____
-        // ___3____________17____
-        BinNode<Integer> three = new BinNode<>(3, null, null);
-        BinNode<Integer> seventeen = new BinNode<>(17, null, null);
-        BinNode<Integer> twelve = new BinNode<>(12, seventeen, null);
         BinNode<Integer> five = new BinNode<>(5, three, twelve);
         return new BinNode<>(7, five, null);
     }
