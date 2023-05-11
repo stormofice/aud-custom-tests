@@ -1,3 +1,5 @@
+[Archived, as AuD is no longer part of the required computer science modules @ FAU]
+
 # AuD Custom Tests
 
 This repository contains custom JUnit tests for the homework of "Algorithmen
